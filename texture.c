@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:17:56 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/10 10:19:01 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:57:50 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,32 @@ void	ft_checkerboard(t_data img, int width, int height, int square_size)
 		x = 0;
 		y++;
 	}
+}
+
+void	load_textures(t_vars *vars)
+{
+    vars->textures.wall = mlx_xpm_file_to_image(vars->mlx, "wall.xpm", , );
+    vars->textures.floor = mlx_xpm_file_to_image(vars->mlx, "floor.xpm", , );
+    vars->textures.player = mlx_xpm_file_to_image(vars->mlx, "player.xpm", , );
+	vars->textures.collectible = mlx_xpm_file_to_image(vars->mlx, "collectible.xpm", , );
+    vars->textures.exit = mlx_xpm_file_to_image(vars->mlx, "exit.xpm", , );
+}
+int	ft_load_texture(char **map, t_vars vars)
+{
+	int x;
+	int y;
+	
+	y = 0;
+	while (map[y][x])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == '1')
+				mlx_put_image_to_window(vars.mlx, vars.win, vars.textures.wall, x * 60, y * 60);
+			x++;
+		}
+		y++;
+	}
+	return (0);
 }

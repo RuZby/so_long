@@ -1,4 +1,4 @@
-SRCS = so_long.c event.c texture.c check_map.c
+SRCS = so_long.c event.c texture.c check_map.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 

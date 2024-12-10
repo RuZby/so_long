@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:42 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/10 10:23:13 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:53:41 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,19 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct	s_texture {
+	void	*wall;
+	void	*floor;
+	void	*player;
+	void 	*collectible;
+	void	*exit;
+}				t_texture;
+
 typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-	t_data	img;
+	void		*mlx;
+	void		*win;
+	t_data		img;
+	t_texture	textures;
 }				t_vars;
 
 typedef struct	s_pos {
@@ -59,15 +68,19 @@ int 	get_opposite(int color);
 int 	add_shade(double distance, int color);
 
 /*check_map*/
-int	ft_check_map(char **map);
-int ft_error(char *tab);
-int	ft_check_character(char **map);
-int	ft_check_rectangle_map(char **map);
-int ft_check_close_map(char **map);
-int	ft_check_item_amount(char **map);
-int check_valid_road(char **map, int x, int y);
-int ft_check_valid_road_coll(char **map, int x, int y);
-int	ft_amount_collectible(char **map);
+int		ft_check_map(char **map);
+int		ft_check_character(char **map);
+int		ft_check_rectangle_map(char **map);
+int 	ft_check_close_map(char **map);
+int		ft_check_item_amount(char **map);
+int 	check_valid_road(char **map, int x, int y);
+int 	ft_check_valid_road_coll(char **map, int x, int y);
+int		ft_amount_collectible(char **map);
 t_pos	ft_find_p(char **map);
+
+/*utils*/
+int 	ft_error(char *tab);
+char	**ft_duplicate_map(char **map);
+void	free_map(char **map);
 
 #endif

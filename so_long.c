@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:45 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/10 10:30:01 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:40:05 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,24 +115,16 @@ int	main(int argc, char **argv)
 	map = parsing(argv[1]);
 	if (!map)
 		return (1);
-	if (ft_check_map(map) == 1)
-		return (1);
-	int i = 0;
-	while (map[i])
-		i++;
-	while (i >= 0)
-	{
-		free(map[i]);
-		i--;
-	}
-	free(map);
+	if (ft_check_map(map))
+		return (free_map(map), 1);
 	vars.mlx = mlx_init();
 	if (!vars.mlx)
-		return (1);
+		return (free_map(map), 1);
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "so_long");
 	if (!vars.win)
-		return (1);
+		return (free_map(map), 1);
 
+	free_map(map);
 	// vars.img.img = mlx_xpm_file_to_image(vars.mlx, img1, &vars.img.line_length, &vars.img.endian);
 	// if (!vars.img.img)
 	// 	return (1);
