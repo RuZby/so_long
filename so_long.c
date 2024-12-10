@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:45 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/09 17:22:33 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:30:01 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ char	*ft_strdup_free(char *s)
 	return (dst);
 }
 
-char **ft_strbigjoin(char **map, char *str)
+char	**ft_strbigjoin(char **map, char *str)
 {
 	char	**new_map;
 	int		len;
 
 	len = 0;
-    if (!map || !str)
+	if (!map || !str)
 		return (NULL);
 	while (map[len])
 		len++;
@@ -79,7 +79,7 @@ char **ft_strbigjoin(char **map, char *str)
 	return (new_map);
 }
 
-char **parsing(char *file)
+char	**parsing(char *file)
 {
 	int		fd;
 	char	*tab;
@@ -115,7 +115,8 @@ int	main(int argc, char **argv)
 	map = parsing(argv[1]);
 	if (!map)
 		return (1);
-	ft_printf("%d\n", ft_check_map(map));
+	if (ft_check_map(map) == 1)
+		return (1);
 	int i = 0;
 	while (map[i])
 		i++;

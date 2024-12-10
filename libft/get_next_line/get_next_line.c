@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:25:36 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/09 14:02:50 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:07:24 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_read_loop(char *line, char *buffer, ssize_t n_read, int fd)
 		line = ft_strjoin_free(line, buffer);
 		if (!line)
 			return (NULL);
-		ft_strlcpy(buffer, buffer + ft_strlen_char(buffer, '\n'), BUFFER_SIZE + 1);
+		ft_strlcpy(buffer, buffer + ft_strlen_char(buffer, '\n'),
+			BUFFER_SIZE + 1);
 		if (ft_strchr(line, '\n'))
 			return (line);
 		n_read = read(fd, buffer, BUFFER_SIZE);
@@ -45,7 +46,8 @@ char	*get_next_line(int fd)
 		line = ft_strjoin_free(line, buffer);
 		if (!line)
 			return (NULL);
-		ft_strlcpy(buffer, buffer + ft_strlen_char(buffer, '\n'), BUFFER_SIZE + 1);
+		ft_strlcpy(buffer, buffer + ft_strlen_char(buffer, '\n'),
+			BUFFER_SIZE + 1);
 		if (ft_strchr(line, '\n'))
 			return (line);
 	}

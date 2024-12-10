@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:42 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/09 17:34:54 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:23:13 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	ft_check_character(char **map);
 int	ft_check_rectangle_map(char **map);
 int ft_check_close_map(char **map);
 int	ft_check_item_amount(char **map);
-int ft_check_valid_road(char **map, int x, int y);
+int check_valid_road(char **map, int x, int y);
 int ft_check_valid_road_coll(char **map, int x, int y);
 int	ft_amount_collectible(char **map);
-t_pos	ft_find_player(char **map);
+t_pos	ft_find_p(char **map);
 
 #endif

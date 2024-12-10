@@ -6,15 +6,15 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:46:03 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/10 09:31:44 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:29:12 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int ft_error(char *tab)
+int	ft_error(char *tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -27,9 +27,9 @@ int ft_error(char *tab)
 
 char	**ft_duplicate_map(char **map)
 {
-	int i;
-	char **new_map;
-	
+	int		i;
+	char	**new_map;
+
 	i = 0;
 	while (map[i])
 		i++;
@@ -56,21 +56,23 @@ char	**ft_duplicate_map(char **map)
 	return (new_map);
 }
 
-void free_map(char **map)
+void	free_map(char **map)
 {
-    int i = 0;
+	int	i;
 
-    while (map[i])
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
 
 int	ft_check_map(char **map)
 {
-	char **new_map;
+	char	**n_map1;
+	char	**n_map2;
 
 	if (ft_check_character(map) == 1)
 		return (ft_error("Error character map\n"));
@@ -80,21 +82,26 @@ int	ft_check_map(char **map)
 		return (ft_error("Error close map\n"));
 	if (ft_check_item_amount(map) == 1)
 		return (ft_error("Error item amount\n"));
-	new_map = ft_duplicate_map(map);
-	if (!new_map)
+	n_map1 = ft_duplicate_map(map);
+	if (!n_map1)
 		return (ft_error("Error duplicate map\n"));
-	if (ft_check_valid_road(new_map, ft_find_player(new_map).x, ft_find_player(new_map).y) == 0)
-		return (ft_error("Error no valid road\n"));
-	if (ft_check_valid_road_coll(map, ft_find_player(map).x, ft_find_player(map).y) != ft_amount_collectible(map))
-		return (ft_error("Error no valid road collectible\n"));
-	free_map(new_map);
+	if (check_valid_road(n_map1, ft_find_p(n_map1).x, ft_find_p(n_map1).y) == 0)
+		return (free_map(n_map1), ft_error("Error no valid road\n"));
+	free_map(n_map1);
+	n_map2 = ft_duplicate_map(map);
+	if (!n_map2)
+		return (ft_error("Error duplicate map\n"));
+	if (ft_amount_collectible(n_map2) != ft_check_valid_road_coll(n_map2,
+			ft_find_p(n_map2).x, ft_find_p(n_map2).y))
+		return (free_map(n_map2), ft_error("Error no valid road\n"));
+	free_map(n_map2);
 	return (0);
 }
 
 int	ft_check_character(char **map)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (map[y])
@@ -114,8 +121,8 @@ int	ft_check_character(char **map)
 
 int	ft_check_rectangle_map(char **map)
 {
-	int x_init;
-	int i;
+	int	x_init;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -129,20 +136,17 @@ int	ft_check_rectangle_map(char **map)
 		while (map[j][i] != '\n' && map[j][i])
 			i++;
 		if (x_init != i)
-		{
-			// ft_printf("x_init = %d, i = %d, j = %d\n", x_init, i, j);
 			return (1);
-		}
 		j++;
 	}
 	return (0);
 }
 
-int ft_check_close_map(char **map)
+int	ft_check_close_map(char **map)
 {
-	size_t x_end;
-	int	x;
-	int	y;
+	size_t	x_end;
+	int		x;
+	int		y;
 
 	x_end = 0;
 	y = 1;
@@ -155,7 +159,8 @@ int ft_check_close_map(char **map)
 	}
 	while (map[y + 1])
 	{
-		if (ft_strlen(map[y]) != x_end + 1 || map[y][0] != '1' || map[y][x_end - 1] != '1')
+		if (ft_strlen(map[y]) != x_end + 1 || map[y][0] != '1'
+			|| map[y][x_end - 1] != '1')
 			return (1);
 		y++;
 	}
@@ -202,9 +207,10 @@ int	ft_check_item_amount(char **map)
 	return (0);
 }
 
-t_pos	ft_find_player(char **map)
+t_pos	ft_find_p(char **map)
 {
 	t_pos	pos;
+
 	pos.y = 0;
 	while (map[pos.y])
 	{
@@ -220,10 +226,10 @@ t_pos	ft_find_player(char **map)
 	return (pos);
 }
 
-int ft_check_valid_road(char **map, int x, int y)
+int	check_valid_road(char **map, int x, int y)
 {
-	int is_exit;
-	
+	int	is_exit;
+
 	is_exit = 0;
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return (0);
@@ -232,18 +238,18 @@ int ft_check_valid_road(char **map, int x, int y)
 		if (map[y][x] == 'E')
 			return (1);
 		map[y][x] = 'V';
-		is_exit = ft_check_valid_road(map, x + 1, y);
-		is_exit += ft_check_valid_road(map, x - 1, y);
-		is_exit += ft_check_valid_road(map, x, y + 1);
-		is_exit += ft_check_valid_road(map, x, y - 1);
+		is_exit = check_valid_road(map, x + 1, y);
+		is_exit += check_valid_road(map, x - 1, y);
+		is_exit += check_valid_road(map, x, y + 1);
+		is_exit += check_valid_road(map, x, y - 1);
 	}
 	return (is_exit);
 }
 
-int ft_check_valid_road_coll(char **map, int x, int y)
+int	ft_check_valid_road_coll(char **map, int x, int y)
 {
-	int is_exit;
-	
+	int	is_exit;
+
 	is_exit = 0;
 	if (map[y][x] == '1' || map[y][x] == 'V')
 		return (0);

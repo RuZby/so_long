@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:07:29 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/09 16:29:00 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/10 10:08:54 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,18 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-
 /*ft_printf*/
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 /*utils_1*/
-int	ft_putchar(int c);
-int	ft_putnbr(int nb);
-int	int_to_hexa(unsigned long int nb, int a);
-int	ft_putnbr_u(unsigned int u);
-int	ft_putstrprintf(char *str);
+int		ft_putchar(int c);
+int		ft_putnbr(int nb);
+int		int_to_hexa(unsigned long int nb, int a);
+int		ft_putnbr_u(unsigned int u);
+int		ft_putstrprintf(char *str);
 
 /*utils_2*/
-int	ft_putpointer(size_t addr);
-
+int		ft_putpointer(size_t addr);
 
 /*get_next_line.c*/
 char	*ft_read_loop(char *line, char *buffer, ssize_t n_read, int fd);
@@ -98,6 +96,5 @@ char	*get_next_line(int fd);
 /*get_next_line_utils.c*/
 size_t	ft_strlen_char(char *s, char c);
 char	*ft_strjoin_free(char *s1, char *s2);
-
 
 #endif
