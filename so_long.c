@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:45 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/10 10:40:05 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/12 15:06:22 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ char	**parsing(char *file)
 
 int	main(int argc, char **argv)
 {
-	t_vars	vars;
-	char	**map;
+	t_vars		vars;
+	t_image		*image;
+	char		**map;
 
-	// img1 = "images/cave.xpm";
 	if (argc != 2)
 		return (ft_error("Wrong number of arguments\n"));
 	map = parsing(argv[1]);
@@ -117,24 +117,17 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_check_map(map))
 		return (free_map(map), 1);
-	vars.mlx = mlx_init();
+	vars.mlx = mlx_init(1920, 1080, "so_long", 0);
 	if (!vars.mlx)
 		return (free_map(map), 1);
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "so_long");
-	if (!vars.win)
+	image = load_textures(vars.mlx);
+	if (!image)
 		return (free_map(map), 1);
-
+	vars.img = image;
+	if (aff_texture(map, vars, image))
+	  	return (1);
 	free_map(map);
-	// vars.img.img = mlx_xpm_file_to_image(vars.mlx, img1, &vars.img.line_length, &vars.img.endian);
-	// if (!vars.img.img)
-	// 	return (1);
-	// vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel, &vars.img.line_length, &vars.img.endian);
-	// if (!vars.img.addr)
-	// 	return (1);
-	// mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
-
-	mlx_key_hook(vars.win, ft_key, &vars); 
-	mlx_hook(vars.win, ON_DESTROY, 0, close_win, &vars);
+	mlx_key_hook(vars.mlx, ft_key, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }

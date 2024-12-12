@@ -6,16 +6,17 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:42 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/10 10:53:41 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/12 14:48:04 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
  #define SO_LONG_H
 
-# include <mlx.h>
+// # include <mlx.h>
 # include <fcntl.h>
 # include "libft/libft.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 /*var*/
 # define ON_DESTROY 17
@@ -25,29 +26,26 @@
 # define S_KEY 115
 # define D_KEY 100
 
-
-/*structure*/
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
 typedef struct	s_texture {
-	void	*wall;
-	void	*floor;
-	void	*player;
-	void 	*collectible;
-	void	*exit;
+	mlx_texture_t	*wall;
+	mlx_texture_t	*floor;
+	mlx_texture_t	*player;
+	mlx_texture_t 	*collectible;
+	mlx_texture_t	*exit;
 }				t_texture;
 
+typedef struct	s_image {
+	mlx_image_t	*wall;
+	mlx_image_t	*floor;
+	mlx_image_t	*player;
+	mlx_image_t	*collectible;
+	mlx_image_t	*exit;
+}				t_image;
+
 typedef struct	s_vars {
-	void		*mlx;
+	mlx_t		*mlx;
 	void		*win;
-	t_data		img;
-	t_texture	textures;
+	t_image	*img;
 }				t_vars;
 
 typedef struct	s_pos {
@@ -56,16 +54,12 @@ typedef struct	s_pos {
 }				t_pos;
 
 /*event*/
-int		ft_key(int keypress, t_vars *vars);
+void	ft_key(mlx_key_data_t keydata, void *vars);
 int		close_win(t_vars *vars);
 
 /*texture*/
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	ft_checkerboard(t_data img, int width, int height, int square_size);
-void	ft_square(t_data img, int x, int y, int len, int color);
-void	ft_triangle(t_data img, int length);
-int 	get_opposite(int color);
-int 	add_shade(double distance, int color);
+t_image	*load_textures(mlx_t *mlx);
+int		aff_texture(char **map, t_vars vars, t_image *image);
 
 /*check_map*/
 int		ft_check_map(char **map);

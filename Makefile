@@ -8,9 +8,11 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-MLXFLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
 
-MLX = ./mlx_linux/libmlx.a
+MLXPATH = ./MLX42/build
+
+MLX = $(MLXPATH)/libmlx42.a
 
 LIBFT = ./libft/libft.a
 
@@ -20,16 +22,15 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(MLX):
-	make -C mlx_linux all
+	make -C $(MLXPATH) all
 
 $(LIBFT):
 	make -C libft all
 
 $(NAME): $(OBJS) $(MLX) $(LIBFT)
-	$(CC) $(CFLAGS) $(MLXFLAGS) $(OBJS) $(MLX) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 
 clean:
-	make -sC mlx_linux clean
 	make -sC libft fclean
 	rm -f $(OBJS)
 
