@@ -1,4 +1,4 @@
-SRCS = so_long.c event.c texture.c check_map.c utils.c
+SRCS = so_long.c event.c texture.c check_map.c utils.c move.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -6,7 +6,7 @@ NAME = so_long
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 MLXFLAGS = -Iinclude -ldl -lglfw -pthread -lm
 

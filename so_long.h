@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:42 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/12 14:48:04 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/13 14:26:50 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ typedef struct	s_image {
 typedef struct	s_vars {
 	mlx_t		*mlx;
 	void		*win;
-	t_image	*img;
+	t_image		*img;
+	char 		**map;
+	int			count_move;
 }				t_vars;
 
 typedef struct	s_pos {
 	int	x;
 	int	y;
+	int old_x;
+	int old_y;
 }				t_pos;
 
 /*event*/
@@ -60,6 +64,9 @@ int		close_win(t_vars *vars);
 /*texture*/
 t_image	*load_textures(mlx_t *mlx);
 int		aff_texture(char **map, t_vars vars, t_image *image);
+
+/*move*/
+char	**ft_move(char **map, t_pos pos, t_vars *vars);
 
 /*check_map*/
 int		ft_check_map(char **map);

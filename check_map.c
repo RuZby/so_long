@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 17:46:03 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/10 10:35:29 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/13 13:19:49 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	ft_check_item_amount(char **map)
 	int	c_count;
 	int	y;
 	int	x;
-	
+
 	y = 0;
 	e_count = 0;
 	p_count = 0;
@@ -161,11 +161,17 @@ t_pos	ft_find_p(char **map)
 		while (map[pos.y][pos.x])
 		{
 			if (map[pos.y][pos.x] == 'P')
+			{
+				pos.old_x = pos.x;
+				pos.old_y = pos.y;
 				return (pos);
+			}
 			pos.x++;
 		}
 		pos.y++;
 	}
+	pos.old_x = pos.x;
+	pos.old_y = pos.y;
 	return (pos);
 }
 
@@ -194,7 +200,7 @@ int	ft_check_valid_road_coll(char **map, int x, int y)
 	int	is_exit;
 
 	is_exit = 0;
-	if (map[y][x] == '1' || map[y][x] == 'V')
+	if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'E')
 		return (0);
 	else
 	{

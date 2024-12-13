@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:54:45 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/12 15:06:22 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/13 13:22:10 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (ft_check_map(map))
 		return (free_map(map), 1);
+	vars.map = map;
 	vars.mlx = mlx_init(1920, 1080, "so_long", 0);
 	if (!vars.mlx)
 		return (free_map(map), 1);
@@ -126,7 +127,7 @@ int	main(int argc, char **argv)
 	vars.img = image;
 	if (aff_texture(map, vars, image))
 	  	return (1);
-	free_map(map);
+	vars.count_move = 0;
 	mlx_key_hook(vars.mlx, ft_key, &vars);
 	mlx_loop(vars.mlx);
 	return (0);

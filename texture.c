@@ -6,7 +6,7 @@
 /*   By: tbeyel <tbeyel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:17:56 by tbeyel            #+#    #+#             */
-/*   Updated: 2024/12/12 15:33:13 by tbeyel           ###   ########.fr       */
+/*   Updated: 2024/12/13 14:38:29 by tbeyel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_image	*load_textures(mlx_t *mlx)
 	if (!image)
 		ft_error("Trop null bouhou\n");
 	image = ft_memset(image, 0, sizeof(t_image));
-	textures.wall = mlx_load_png("images/wall.png");
-	textures.floor = mlx_load_png("images/floor.png");
+	textures.wall = mlx_load_png("images/wall_1.png");
+	textures.floor = mlx_load_png("images/floor_2.png");
 	textures.collectible = mlx_load_png("images/collectible.png");
 	textures.player = mlx_load_png("images/player.png");
 	textures.exit = mlx_load_png("images/exit.png");
